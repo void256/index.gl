@@ -3,12 +3,12 @@
   <groupId>com.lessvoid</groupId>
   <artifactId>indexgl</artifactId>
   <packaging>war</packaging>
-  <version>0.1</version>
+  <version>0.2-SNAPSHOT</version>
   <name>indexgl Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <scm>
     <developerConnection>scm:git:git@github.com:void256/index.gl.git</developerConnection>
-    <tag>indexgl-0.1</tag>
+    <tag>HEAD</tag>
   </scm>
   <properties>
     <lucene.version>4.6.1</lucene.version>
