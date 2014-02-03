@@ -10,7 +10,7 @@ was introduced - look no further! You've found the right place.
 
 ## Limitations
 
-Currently there is no support for Extensions.
+Currently there is no support for search for OpenGL-Extensions.
 
 Additionally it would be nice to link to the reference pages. This is missing as well.
 
