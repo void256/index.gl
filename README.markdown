@@ -2,8 +2,8 @@
 
 ## What is this?
 
-It's a searchable Index of all OpenGL functions and enums available in the new official (XML based API-
-Registry)[https://www.opengl.org/discussion_boards/showthread.php/181927-New-XML-based-API-Registry-released]
+It's a searchable Index of all OpenGL functions and enums available in the new official [XML based API-
+Registry](https://www.opengl.org/discussion_boards/showthread.php/181927-New-XML-based-API-Registry-released)
 with the only purpose of displaying the OpenGL version where the function/enum is available.
 
 It shows OpenGL, OpenGL Core Profile and OpenGL ES. So if you are unsure in which OpenGL version, f.i. `glUseProgram`
