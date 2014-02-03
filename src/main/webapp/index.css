@@ -1,0 +1,32 @@
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 396px;
+  height: 50px;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+.typeahead {
+  background-color: #fff;
+}
+
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+
+.dropdown-footer {
+  font-size: 0.6em;
+  line-height: 1em;
+  padding: 4px 5px 1px 5px;
+  border-width: 1px 0px 0px 0px;
+  border-color: #eee;
+  border-style: solid;
+  color: #888;
+}

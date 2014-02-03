@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenGL Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="typeahead.js-bootstrap.css" rel="stylesheet" media="screen">
+    <link href="index.css" rel="stylesheet" media="screen">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/typeahead.min.js"></script>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>OpenGL Index <small>Beta, ${project.version}</small></h1>
+        <p>Search for any OpenGL function or enum and we'll tell you in which OpenGL version it is supported. <br><small style="color: #aaa">No OpenGL extensions yet. Sorry.</small><br><br></p>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="input-group">
+              <form id="target" action="destination.html">
+                <input id="search-input" class="typeahead" type="text" placeholder="glBegin, GL_VERTEX_ARRAY, ..."/>
+                <button type="submit" class="btn btn-default btn-lg">
+                  <span>Find</span>
+                </button>
+              </form>
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+      </div>
+      <div id="result-parent" class="container" style="font-size: 12px; display: none">
+        <p>&nbsp;</p>
+        <h4>Results:</h4>
+        <div id="result"></div>
+      </div>
+      <div class="text-center">
+        <br><br>
+        <small><a href="api/">Web-API</a></small>
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="void256">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    
+      <a href="https://twitter.com/void256" class="twitter-follow-button" data-show-count="false">Follow @void256</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(
+        function(){
+          $("#result-parent").hide();
+
+          $("#target").submit(function( event ) {
+            $('#search-input').trigger('blur');
+            getData($("#search-input").val());
+            event.preventDefault();
+          });
+
+          $('#search-input').bind('typeahead:selected', function(obj, datum) {
+            getData(datum.value);  
+          });
+
+          var getData = function(gl) {
+            $.getJSON("api/gl/" + gl)
+              .done(function( data ) {
+                if (!data) {
+                  $('#result').html("Sorry but it seems like we didn't find anything about '" + gl + "' :(");
+                  $("#result-parent").show();
+                  return;
+                }
+
+                var content = '<div class="panel panel-primary">';
+                content += '<div class="panel-heading" style="padding: 5px 10px;">';
+                content += data.glName;
+                content += '</div>';
+                content += '<table class="table table-condensed table-hover table-bordered table-striped">';
+
+                var headerRow = '<th><div class="text-center">API</div></th>';
+                $.each(data.versions, function(i, version) {
+                  headerRow += '<th><div class="text-center">' + version + '</div></th>';
+                });
+                content += '<tr>' + headerRow + '</tr>';
+
+                $.each(data.list, function(i, info) {
+                  var dataRow = '<td>' + info.api + '</td>';
+                  $.each(info.supported, function(j, supported) {
+                    if (supported == 'Y') {
+                      dataRow += '<td class="success"><div class="text-center">' + supported + '</div></td>';
+                    } else if (supported == 'N') {
+                      dataRow += '<td class="danger"><div class="text-center">' + supported + '</div></td>';
+                    } else {
+                      dataRow += '<td><div class="text-center">' + supported + '</div></td>';
+                    }
+                  });
+                  content += '<tr>' + dataRow + '</tr>';
+                });
+
+                content += '</table>';
+                content += '</div>';
+
+                $('#result').html(content);
+                $("#result-parent").show();
+              })
+              .fail(function( jqxhr, textStatus, error ) {
+                var err = textStatus + ", " + error;
+                console.log( "Request Failed: " + err );
+              });
+          };
+
+          var footerDom = $('<div>', { id: "dropdown-footer", class: "text-right dropdown-footer"});
+          $('#search-input').typeahead([{
+            remote: {
+              url: 'api/find?q=%QUERY',
+              filter: function (response) {
+                $('#dropdown-footer').html(response.stats)
+                return response.result;
+              }
+            },
+            limit: 10,
+            footer: footerDom
+          }]);
+        });
+    </script>
+  </body>
+</html>
