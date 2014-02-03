@@ -1,4 +1,4 @@
-# Sourcecode and documentation for http://index.gl/ - the OpenGL Index
+# http://index.gl/ - The OpenGL Index
 
 ## What is this?
 
