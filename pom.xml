@@ -58,6 +58,22 @@
       <version>3.2.1</version>
     </dependency>
   </dependencies>
+  <distributionManagement>
+    <repository>
+      <id>nifty-maven-repo.sourceforge.net</id>
+      <url>sftp://web.sourceforge.net/home/project-web/nifty-gui/htdocs/nifty-maven-repo</url>
+    </repository>
+    <snapshotRepository>
+      <id>nifty-maven-repo.sourceforge.net</id>
+      <url>sftp://web.sourceforge.net/home/project-web/nifty-gui/htdocs/nifty-maven-repo</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <repositories>
+    <repository>
+      <id>nifty-maven-repo.sourceforge.net</id>
+      <url>http://nifty-gui.sourceforge.net/nifty-maven-repo</url>
+    </repository>
+  </repositories>
   <pluginRepositories>
     <pluginRepository>
       <id>cloudbees-public-release</id>
@@ -71,6 +87,13 @@
     </pluginRepository>
   </pluginRepositories>
   <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>1.0-beta-7</version>
+      </extension>
+    </extensions>
     <finalName>indexgl</finalName>
     <plugins>
       <plugin>
