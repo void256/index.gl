@@ -108,11 +108,13 @@ public class IndexGL {
     result.append(url.toString()
         .replaceAll("%7Bidentifier%7D", res.getString(message + ".name"))
         .replaceAll("%7Bsearch%7D", res.getString(message + ".name"))
+        .replaceAll(".void256.eu.cloudbees.net", "")
         );
     result.append("\">");
     result.append(url.toString()
         .replaceAll("%7Bidentifier%7D", res.getString(message + ".name"))
         .replaceAll("%7Bsearch%7D", res.getString(message + ".name"))
+        .replaceAll(".void256.eu.cloudbees.net", "")
         );
     result.append("</a>");
     result.append("</code>");
