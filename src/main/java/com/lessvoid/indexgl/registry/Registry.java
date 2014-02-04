@@ -393,7 +393,7 @@ public class Registry {
 
     private String toString(final Integer supported) {
       if (supported == null) {
-        return "-";
+        return " ";
       }
       if (supported >= 1) {
         return "Y";

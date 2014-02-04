@@ -56,8 +56,8 @@ public class RegistryTest {
     assertVersions(result.getVersions(), "1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "2.0", "2.1", "3.0", "3.1", "3.2", "3.3", "4.0", "4.1", "4.2", "4.3", "4.4");
     assertEquals(3, result.getList().size());
     assertSupported(result.getList().get(0), "OpenGL",              "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y");
-    assertSupported(result.getList().get(1), "OpenGL Core Profile", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "N", "N", "N", "N", "N", "N", "N");
-    assertSupported(result.getList().get(2), "OpenGL ES",           "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
+    assertSupported(result.getList().get(1), "OpenGL Core Profile", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "N", "N", "N", "N", "N", "N", "N");
+    assertSupported(result.getList().get(2), "OpenGL ES",           " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
   }
 
   @Test
@@ -68,8 +68,8 @@ public class RegistryTest {
     assertVersions(result.getVersions(), "1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "2.0", "2.1", "3.0", "3.1", "3.2", "3.3", "4.0", "4.1", "4.2", "4.3", "4.4");
     assertEquals(3, result.getList().size());
     assertSupported(result.getList().get(0), "OpenGL",              "N", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y");
-    assertSupported(result.getList().get(1), "OpenGL Core Profile", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "N", "N", "N", "N", "N", "Y", "Y");
-    assertSupported(result.getList().get(2), "OpenGL ES",           "Y", "-", "-", "-", "-", "-", "Y", "-", "Y", "-", "-", "-", "-", "-", "-", "-", "-");
+    assertSupported(result.getList().get(1), "OpenGL Core Profile", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "N", "N", "N", "N", "N", "Y", "Y");
+    assertSupported(result.getList().get(2), "OpenGL ES",           "Y", " ", " ", " ", " ", " ", "Y", " ", "Y", " ", " ", " ", " ", " ", " ", " ", " ");
   }
 
   @Test
@@ -86,8 +86,8 @@ public class RegistryTest {
     assertVersions(result.getVersions(), "1.0","1.1","1.2","1.3","1.4","1.5","2.0","2.1","3.0","3.1","3.2","3.3","4.0","4.1","4.2","4.3","4.4");
     assertEquals(3, result.getList().size());
     assertSupported(result.getList().get(0), "OpenGL",              "N", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y");
-    assertSupported(result.getList().get(1), "OpenGL Core Profile", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "N", "N", "N", "N", "N", "N", "N");
-    assertSupported(result.getList().get(2), "OpenGL ES",           "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
+    assertSupported(result.getList().get(1), "OpenGL Core Profile", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "N", "N", "N", "N", "N", "N", "N");
+    assertSupported(result.getList().get(2), "OpenGL ES",           " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
   }
 
   @Test
@@ -98,8 +98,8 @@ public class RegistryTest {
     assertVersions(result.getVersions(), "1.0","1.1","1.2","1.3","1.4","1.5","2.0","2.1","3.0","3.1","3.2","3.3","4.0","4.1","4.2","4.3","4.4");
     assertEquals(3, result.getList().size());
     assertSupported(result.getList().get(0), "OpenGL",              "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "Y", "Y", "Y");
-    assertSupported(result.getList().get(1), "OpenGL Core Profile", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "N", "N", "N", "N", "Y", "Y", "Y");
-    assertSupported(result.getList().get(2), "OpenGL ES",           "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
+    assertSupported(result.getList().get(1), "OpenGL Core Profile", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "N", "N", "N", "N", "Y", "Y", "Y");
+    assertSupported(result.getList().get(2), "OpenGL ES",           " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
   }
 
   private void assertResult(final String[] result, final String ... expected) {
