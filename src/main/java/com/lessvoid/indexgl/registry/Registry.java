@@ -178,11 +178,12 @@ public class Registry {
           }
           if (supported) {
             versionInfo.compatibilityProfile++;
-
-            if (glCoreVersions.contains(version)) {
-              if (versionInfo.coreProfile == null) {
-                versionInfo.coreProfile = 0;
-              }
+          }
+          if (glCoreVersions.contains(version)) {
+            if (versionInfo.coreProfile == null) {
+              versionInfo.coreProfile = 0;
+            }
+            if (supported) {
               versionInfo.coreProfile++;
             }
           }

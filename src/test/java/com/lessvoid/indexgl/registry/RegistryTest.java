@@ -90,6 +90,18 @@ public class RegistryTest {
     assertSupported(result.getList().get(2), "OpenGL ES",           "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
   }
 
+  @Test
+  public void testDirectHitGLDrawArraysInstancedBaseInstance() throws Exception {
+    GLResult result = registry.getGLInfo("glDrawArraysInstancedBaseInstance");
+
+    assertEquals("glDrawArraysInstancedBaseInstance", result.getName());
+    assertVersions(result.getVersions(), "1.0","1.1","1.2","1.3","1.4","1.5","2.0","2.1","3.0","3.1","3.2","3.3","4.0","4.1","4.2","4.3","4.4");
+    assertEquals(3, result.getList().size());
+    assertSupported(result.getList().get(0), "OpenGL",              "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "N", "Y", "Y", "Y");
+    assertSupported(result.getList().get(1), "OpenGL Core Profile", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "N", "N", "N", "N", "Y", "Y", "Y");
+    assertSupported(result.getList().get(2), "OpenGL ES",           "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-");
+  }
+
   private void assertResult(final String[] result, final String ... expected) {
     assertArrayEquals(expected, result);
   }
