@@ -18,6 +18,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -60,8 +61,11 @@ public class IndexGL {
   @GET
   @Path("find")
   @Produces(MediaType.APPLICATION_JSON)
-  public String getFind(@QueryParam(value="q") final String q) throws Exception {
-    return gson.toJsonTree(registry.typeahead(q)).toString();
+  public Response getFind(@QueryParam(value="q") final String q) throws Exception {
+    if (q == null || q.isEmpty()) {
+      return Response.status(Status.BAD_REQUEST).build();
+    }
+    return Response.ok(gson.toJsonTree(registry.typeahead(q)).toString(), MediaType.APPLICATION_JSON).build();
   }
 
   @GET
