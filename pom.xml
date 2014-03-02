@@ -136,6 +136,26 @@
         <artifactId>bees-maven-plugin</artifactId>
         <version>1.3.2</version>
       </plugin>
+      <plugin>
+        <groupId>com.github.danielflower.mavenplugins</groupId>
+        <artifactId>maven-gitlog-plugin</artifactId>
+        <version>1.5.2</version>
+        <configuration>
+          <outputDirectory>target/indexgl</outputDirectory>
+          <generatePlainTextChangeLog>false</generatePlainTextChangeLog>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/void256/index.gl/issues</url>
+  </issueManagement>
 </project>
