@@ -82,7 +82,8 @@ public class Registry {
    */
   private final Set<String> glVersions = new TreeSet<String>();
   private final Set<String> glCoreVersions = new TreeSet<String>();
-  private final Set<String> glESVersions = new TreeSet<String>();
+  private final Set<String> glES1Versions = new TreeSet<String>();
+  private final Set<String> glES2Versions = new TreeSet<String>();
 
   /**
    * Registry constructor. This will parse the registry.
@@ -111,9 +112,10 @@ public class Registry {
             if (api.startsWith("3.3") || api.startsWith("3.2") || api.startsWith("4.")) {
               glCoreVersions.add(api);
             }
-            if (api.equals("1.0") || api.equals("2.0") || api.equals("3.0")) {
-              glESVersions.add(api);
-            }
+          } else if (apiNumber.startsWith("gles1")) {
+            glES1Versions.add(apiNumber.substring(6, apiNumber.length()));
+          } else if (apiNumber.startsWith("gles2")) {
+            glES2Versions.add(apiNumber.substring(6, apiNumber.length()));
           }
         }
       }
@@ -155,12 +157,10 @@ public class Registry {
     // nothing found?
     ScoreDoc[] required = findRequired(gl, searcher);
     if (required.length == 0) {
-      return null; // FIXME Nothing found ... return better GLResult for that
-                   // case
+      return null; // FIXME Nothing found ... return better GLResult for this case
     }
 
-    // the name is the same for all docs so we can extract it from the first
-    // entry
+    // the name is the same for all docs so we can extract it from the first entry
     String glName = searcher.doc(required[0].doc).get("name");
 
     // now process them
@@ -188,9 +188,23 @@ public class Registry {
             }
           }
         }
-      } else if (doc.get("api").startsWith("gles")) {
+      } else if (doc.get("api").startsWith("gles1")) {
         boolean supported = false;
-        for (String version : glESVersions) {
+        for (String version : glES1Versions) {
+          if (!supported) {
+            supported = version.equals(doc.get("number"));
+          }
+          VersionInfo versionInfo = versionInfos.get(version);
+          if (versionInfo.esProfile == null) {
+            versionInfo.esProfile = 0;
+          }
+          if (supported) {
+            versionInfo.esProfile++;
+          }
+        }
+      } else if (doc.get("api").startsWith("gles2")) {
+        boolean supported = false;
+        for (String version : glES2Versions) {
           if (!supported) {
             supported = version.equals(doc.get("number"));
           }
@@ -222,9 +236,22 @@ public class Registry {
             }
           }
         }
-      } else if (doc.get("api").startsWith("gles")) {
+      } else if (doc.get("api").startsWith("gles1")) {
         boolean removedVersion = false;
-        for (String version : glESVersions) {
+        for (String version : glES1Versions) {
+          if (!removedVersion) {
+            removedVersion = version.equals(doc.get("number"));
+          }
+          if (removedVersion) {
+            VersionInfo versionInfo = versionInfos.get(version);
+            if (versionInfo.esProfile != null) {
+              versionInfo.esProfile--;
+            }
+          }
+        }
+      } else if (doc.get("api").startsWith("gles2")) {
+        boolean removedVersion = false;
+        for (String version : glES2Versions) {
           if (!removedVersion) {
             removedVersion = version.equals(doc.get("number"));
           }
